@@ -16,10 +16,11 @@ jobs:
       - checkout
       - run: python client_test.py
 
-workflows:  
-  build_and_test:  
-    jobs:  
-      - build  
-      - test:  
-          requires:  
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
             - build
