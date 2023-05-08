@@ -1,3 +1,5 @@
+"""Client which can get data from url and post data
+"""
 from urllib.request import urlopen, Request
 import urllib.error as ERROR
 import json
@@ -6,7 +8,7 @@ import json
 class Client:
     """Get data from the url, post data to the url and get response.
     """
-    def __init__(self, url) -> None:
+    def __init__(self, url):
         self.url = url
 
     def get(self):
@@ -17,13 +19,17 @@ class Client:
             with urlopen(self.url) as response:
                 data = response.read().decode("utf-8")
                 data_json = json.loads(data)
-                with open('message_json.txt', mode='wt', encoding='utf-8') as f:
-                    f.write(json.dumps(data_json))
+                with open('message_json.txt', mode='wt', encoding='utf-8') as file:
+                    file.write(json.dumps(data_json))
                 return data_json
-        except ERROR.HTTPError as e:
+        except ERROR.HTTPError as error:
             print("HTTP Error: The URL is not the HTTP")
-        except ERROR.URLError as e:
+            print("Error code: ", error.code)
+            return None
+        except ERROR.URLError as error:
             print("URL Error: Cannot connect to the server")
+            print("Error code: ", error)
+            return None
 
     def post(self, data):
         """Post data to the URL and get the response.
@@ -31,16 +37,19 @@ class Client:
         data = json.dumps(data).encode("utf-8")
         headers = {"Content-Type": "application/json"}
         request = Request(self.url, data=data, headers=headers)
-        
+
         try:
             with urlopen(request) as response:
                 result = response.read().decode("utf-8")
                 result_json = json.loads(result)
-                with open('result_json.txt', mode='wt', encoding='utf-8') as f:
-                    f.write(json.dumps(result_json))
+                with open('result_json.txt', mode='wt', encoding='utf-8') as file:
+                    file.write(json.dumps(result_json))
                 return result_json
-        except ERROR.HTTPError as e:
+        except ERROR.HTTPError as error:
             print("HTTP Error: The URL is not the HTTP")
-        except ERROR.URLError as e:
+            print("Error code: ", error.code)
+            return None
+        except ERROR.URLError as error:
             print("URL Error: Cannot connect to the server")
-
+            print("Error code: ", error)
+            return None
