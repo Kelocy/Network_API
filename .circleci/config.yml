@@ -1,8 +1,8 @@
 version: 2
-  jobs:
-    build:
-      docker:
-        - image: cimg/python:3.10.9
-      steps:
-        - checkout
-        - run: python --version
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.10.9
+    steps:
+      - checkout
+      - run: python --version
