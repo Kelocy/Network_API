@@ -25,3 +25,4 @@ class Client:
                 # recv(1024) specifies the maximum amount of data in each call.
                 response = sock.recv(1024).decode()
                 print("Server response: ", response)
+                return data, response

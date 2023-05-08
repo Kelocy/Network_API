@@ -3,6 +3,7 @@
 import unittest
 from src.client import Client
 
+
 class ClientTest(unittest.TestCase):
     """Two test functions test the client class
     """
@@ -10,15 +11,15 @@ class ClientTest(unittest.TestCase):
     def setUp(self):
         """Setup a client with url
         """
-        url = "https://jsonplaceholder.typicode.com/posts"
-        self.client = Client(url)
+        self.client = Client()
 
     def test_function_get(self):
         """Get function will pull data from the url
         """
-        data = self.client.get()
-        print(data)
-
+        url = "https://jsonplaceholder.typicode.com/posts"
+        return_data = self.client.get(url)
+        self.assertIsNotNone(return_data)
+        print(return_data)
 
     def test_function_post(self):
         """Post function will send data to url and receive the response
@@ -28,10 +29,12 @@ class ClientTest(unittest.TestCase):
             "email": "alex@example.com",
             "message": "Hello, world!"
         }
-        return_data = self.client.post(data_post)
+        url = "https://jsonplaceholder.typicode.com/posts"
+        return_response = self.client.post(url, data_post)
+        return_data = self.client.get(return_response)
         data_post.update({"id": 101})
         self.assertEqual(return_data, data_post)
-        print(data_post)
+        print(return_data)
 
 
 if __name__ == "__main__":
