@@ -11,14 +11,17 @@ class ClientTest(unittest.TestCase):
         # print(data)
 
     def test_function_post(self):
+        url = "https://jsonplaceholder.typicode.com/posts"
+        client = Client(url)
         data_post = {
             "name": "Alex",
             "email": "alex@example.com",
             "message": "Hello, world!"
         }
-        return_data = self.client.post(data_post)
-        self.assertEqual(data_post, return_data.update({"id": 101}))
-        # print(return_data)
+        return_data = client.post(data_post)
+        data_post.update({"id": 101})
+        self.assertEqual(return_data, data_post)
+        
 
 
 if __name__ == "__main__":
