@@ -13,6 +13,7 @@ class Server:
         self.key = key
 
     def start(self):
+        print("Server is listening...")
         context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
         context.load_cert_chain(certfile=self.cert, keyfile=self.key)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -21,8 +22,11 @@ class Server:
             with context.wrap_socket(sock, server_side=True) as ssock:
                 while True:
                     conn, addr = ssock.accept()
-                    with conn:
+                    try:
                         data = conn.recv(1024)
                         if not data:
                             break
+                        print("Receive data: ", data.decode())
                         conn.sendall(data)
+                    except:
+                        print("Connection Error")

@@ -16,6 +16,6 @@ class Client:
             with context.wrap_socket(sock, server_hostname=self.HOST) as ssock:
                 ssock.sendall(msg.encode())
                 data = ssock.recv(1024)
-                print(data.decode())
+                print("Receive data from server: ", data.decode())
 
         return data.decode()

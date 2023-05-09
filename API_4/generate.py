@@ -1,4 +1,4 @@
-from core.IPGenerator import IPGenerator
+from src.IPGenerator import IPGenerator
 
 cidr_network_ipv4 = "123.45.67.89/27"
 cidr_network_ipv6 = "2001:db8::/120"
