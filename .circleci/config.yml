@@ -2,19 +2,23 @@ version: 2
 
 jobs:
   build:
-    working_dictionary: ~/API_1
+    working_dictionary: ~
     docker:
       - image: cimg/python:3.10.9
     steps:
       - checkout
       - run: python --version
   test:
-    working_dictionary: ~/API_1
+    working_dictionary: ~
     docker:
       - image: cimg/python:3.10.9
     steps:
       - checkout
-      - run: python API_1/client_test.py
+      - run: python API_1/service_test.py
+      - run: python API_23/service_test.py
+      - run: python API_4/service_test.py
+      - run: python API_6/service_test.py
+      - run: python API_7/service_test.py
 
 workflows:
   version: 2

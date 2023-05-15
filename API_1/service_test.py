@@ -4,7 +4,7 @@ import unittest
 from src.client import Client
 
 
-class ClientTest(unittest.TestCase):
+class ServiceTest(unittest.TestCase):
     """Two test functions test the client class
     """
 

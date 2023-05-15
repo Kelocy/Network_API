@@ -1,3 +1,4 @@
+#!/opt/homebrew/anaconda3/envs/personal/bin/python
 import cgi
 import json
 

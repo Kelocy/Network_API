@@ -22,4 +22,8 @@ class Server:
 
             # Start the server
             print("Start the server")
-            server.serve_forever()
+            try:
+                server.serve_forever()
+            except KeyboardInterrupt:
+                print("\nKeyboard interrupt received, exiting.")
+                server.shutdown()

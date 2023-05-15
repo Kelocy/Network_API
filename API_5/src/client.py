@@ -4,7 +4,7 @@ import json
 
 class Client:
     def __init__(self, host, port):
-        self.url = host + '/' + str(port)
+        self.url = "http://{}:{}".format(host, port)
 
     def call_remote_function(self, module_name, function_name, *args):
         data = {
