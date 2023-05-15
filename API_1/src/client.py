@@ -21,7 +21,7 @@ class Client:
                     file.write(json.dumps(data_json))
                 return data_json
         except ERROR.HTTPError as error:
-            print("HTTP Error: The URL is not the HTTP")
+            print("HTTP Error: The URL is not HTTP")
             print("Error code: ", error.code)
             return None
         except ERROR.URLError as error:
@@ -34,5 +34,17 @@ class Client:
         """
         data = json.dumps(data).encode("utf-8")
         headers = {"Content-Type": "application/json"}
-        request = Request(url, data=data, headers=headers)
+        request = Request(url, data=data, headers=headers, method="POST")
+        return request
+
+    def put(self, url, data):
+        """Put data to the URL and get the response.
+        """
+        data = json.dumps(data).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        request = Request(url, data=data, headers=headers, method="PUT")
+        return request
+
+    def delete(self, url):
+        request = Request(url, method="DELETE")
         return request
