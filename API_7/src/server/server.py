@@ -23,17 +23,14 @@ class Server:
             sock.bind((self.host, self.port))
             sock.listen(5)
             with context.wrap_socket(sock, server_side=True) as ssock:
+                # while True:
+                conn, _ = ssock.accept()
                 try:
-                    while True:
-                        conn, _ = ssock.accept()
-                        try:
-                            data = conn.recv(1024)
-                            if not data:
-                                break
-                            print("Receive data: ", data.decode())
-                            conn.sendall(data)
-                        except ssl.SSLError as SSLError:
-                            raise ConnectionError(
-                                "SSL Connection Error") from SSLError
-                except KeyboardInterrupt:
-                    print("KeyboardInterrupt error occurred")
+                    data = conn.recv(1024)
+                    # if not data:
+                    #     break
+                    print("Receive data: ", data.decode())
+                    conn.sendall(data)
+                except ssl.SSLError as SSLError:
+                    raise ConnectionError(
+                        "SSL Connection Error") from SSLError

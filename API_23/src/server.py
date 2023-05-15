@@ -37,14 +37,6 @@ class MyUDPHandler(BaseRequestHandler):
         socket.sendto(data.encode(), self.client_address)
 
 
-class ThreadedTCPServer(ThreadingMixIn, TCPServer):
-    pass
-
-
-class ThreadedUDPServer(ThreadingMixIn, UDPServer):
-    pass
-
-
 class ServerTCP:
     def __init__(self, HOST, PORT):
         self.HOST = HOST
@@ -53,12 +45,11 @@ class ServerTCP:
     def start(self):
         print("Server is listening...")
         with TCPServer((self.HOST, self.PORT), MyTCPHandler) as server:
+            self.server = server
             server.serve_forever()
 
-    def start_once(self):
-        print("Server is listening...")
-        server = ThreadedTCPServer((self.HOST, self.PORT), MyTCPHandler)
-        return server
+    def close(self):
+        self.server.shutdown()
 
 
 class ServerUDP:
@@ -69,9 +60,8 @@ class ServerUDP:
     def start(self):
         print("Server is listening...")
         with UDPServer((self.HOST, self.PORT), MyUDPHandler) as server:
+            self.server = server
             server.serve_forever()
 
-    def start_once(self):
-        print("Server is listening...")
-        server = ThreadedUDPServer((self.HOST, self.PORT), MyUDPHandler)
-        return server
+    def close(self):
+        self.server.shutdown()

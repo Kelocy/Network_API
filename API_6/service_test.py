@@ -17,6 +17,7 @@ class ServiceTest(unittest.TestCase):
         client = Client(HOST, PORT)
         response = client.start(13, 45)
         self.assertEquals(58, response)
+        server.close()
 
 
 if __name__ == "__main__":

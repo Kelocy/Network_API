@@ -14,8 +14,7 @@ class ServiceTest(unittest.TestCase):
     def test_tcp(self):
         HOST, PORT = "localhost", 9900
         server = ServerTCP(HOST, PORT)
-        server_once = server.start_once()
-        server_thread = threading.Thread(target=server_once.serve_forever)
+        server_thread = threading.Thread(target=server.start)
         server_thread.start()
 
         time.sleep(1)
@@ -24,13 +23,12 @@ class ServiceTest(unittest.TestCase):
         data = "Hello World!"
         return_data = client.start_tcp(data)
         self.assertEqual(data, return_data)
-        server_once.shutdown()
+        server.close()
 
     def test_udp(self):
         HOST, PORT = "localhost", 9989
         server = ServerUDP(HOST, PORT)
-        server_once = server.start_once()
-        server_thread = threading.Thread(target=server_once.serve_forever)
+        server_thread = threading.Thread(target=server.start)
         server_thread.start()
 
         time.sleep(1)
@@ -39,7 +37,7 @@ class ServiceTest(unittest.TestCase):
         data = "Hello World!"
         return_data = client.start_udp(data)
         self.assertEqual(data, return_data)
-        server_once.shutdown()
+        server.close()
 
 
 if __name__ == "__main__":

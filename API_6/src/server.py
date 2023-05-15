@@ -18,6 +18,7 @@ class Server:
 
     def start(self):
         with xmlrpc.server.SimpleXMLRPCServer((self.HOST, self.PORT)) as server:
+            self.server = server
             server.register_instance(AddFunction())
 
             # Start the server
@@ -27,3 +28,6 @@ class Server:
             except KeyboardInterrupt:
                 print("\nKeyboard interrupt received, exiting.")
                 server.shutdown()
+
+    def close(self):
+        self.server.shutdown()
