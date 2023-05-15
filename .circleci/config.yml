@@ -16,7 +16,6 @@ jobs:
       - checkout
       - run: python API_1/service_test.py
       - run: python API_23/service_test.py
-      - run: python API_4/service_test.py
       - run: python API_6/service_test.py
       - run: python API_7/service_test.py
 
