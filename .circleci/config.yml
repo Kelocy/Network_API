@@ -14,13 +14,13 @@ jobs:
       - image: cimg/python:3.10.9
     steps:
       - checkout
-      - run: python -m unittest test/unit/HTTP_test.py
-      - run: python -m unittest test/unit/TCP_test.py
-      - run: python -m unittest test/unit/UDP_test.py
-      - run: python -m unittest test/unit/IPGenerator_test.py
-      - run: python -m unittest test/unit/xmlrpc_test.py
-      - run: python -m unittest test/unit/ssl_test.py
-      - run: python -m unittest test/integrate/service_test.py
+      - run: python -m unittest test.unit.HTTP_test
+      - run: python -m unittest test.unit.TCP_test
+      - run: python -m unittest test.unit.UDP_test
+      - run: python -m unittest test.unit.IPGenerator_test
+      - run: python -m unittest test.unit.xmlrpc_test
+      - run: python -m unittest test.unit.ssl_test
+      - run: python -m unittest test.integrate.service_test
 
 workflows:
   version: 2

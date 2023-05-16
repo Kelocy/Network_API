@@ -2,7 +2,9 @@
 """
 from urllib.request import urlopen, Request
 import urllib.error as ERROR
+
 import json
+from http.client import InvalidURL
 
 
 class HTTPClient:
@@ -21,30 +23,85 @@ class HTTPClient:
                     file.write(json.dumps(data_json))
                 return data_json
         except ERROR.HTTPError as error:
-            print("HTTP Error: The URL is not HTTP")
+            print("\nHTTP Error")
             print("Error code: ", error.code)
-            return None
+            raise error
         except ERROR.URLError as error:
-            print("URL Error: Cannot connect to the server")
-            print("Error code: ", error)
-            return None
+            print("\nURL Error")
+            print("Error reason: ", error.reason)
+            raise error
+        except InvalidURL as error:
+            print("\nInvalid URL Error")
+            raise error
+        except ValueError as error:
+            print("\nValue Error")
+            raise error
 
     def post(self, url, data):
         """Post data to the URL and get the response.
         """
+        if not isinstance(data, dict):
+            raise TypeError
         data = json.dumps(data).encode("utf-8")
         headers = {"Content-Type": "application/json"}
-        request = Request(url, data=data, headers=headers, method="POST")
-        return request
+        try:
+            request = Request(url, data=data, headers=headers, method="POST")
+            return request
+        except ERROR.HTTPError as error:
+            print("\nHTTP Error")
+            print("Error code: ", error.code)
+            raise error
+        except ERROR.URLError as error:
+            print("\nURL Error")
+            print("Error reason: ", error.reason)
+            raise error
+        except InvalidURL as error:
+            print("\nInvalid URL Error")
+            raise error
+        except ValueError as error:
+            print("\nValue Error")
+            raise error
 
     def put(self, url, data):
         """Put data to the URL and get the response.
         """
+        if not isinstance(data, dict):
+            raise TypeError
         data = json.dumps(data).encode("utf-8")
         headers = {"Content-Type": "application/json"}
-        request = Request(url, data=data, headers=headers, method="PUT")
-        return request
+        try:
+            request = Request(url, data=data, headers=headers, method="PUT")
+            return request
+        except ERROR.HTTPError as error:
+            print("\nHTTP Error")
+            print("Error code: ", error.code)
+            raise error
+        except ERROR.URLError as error:
+            print("\nURL Error")
+            print("Error reason: ", error.reason)
+            raise error
+        except InvalidURL as error:
+            print("\nInvalid URL Error")
+            raise error
+        except ValueError as error:
+            print("\nValue Error")
+            raise error
 
     def delete(self, url):
-        request = Request(url, method="DELETE")
-        return request
+        try:
+            request = Request(url, method="DELETE")
+            return request
+        except ERROR.HTTPError as error:
+            print("\nHTTP Error")
+            print("Error code: ", error.code)
+            raise error
+        except ERROR.URLError as error:
+            print("\nURL Error")
+            print("Error reason: ", error.reason)
+            raise error
+        except InvalidURL as error:
+            print("\nInvalid URL Error")
+            raise error
+        except ValueError as error:
+            print("\nValue Error")
+            raise error
