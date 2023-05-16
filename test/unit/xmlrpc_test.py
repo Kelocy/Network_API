@@ -7,7 +7,7 @@ from src.client.xmlrpc_client import XmlrpcClient
 
 class XmlrpcTest(unittest.TestCase):
     def test_run(self):
-        HOST, PORT = 'localhost', 8000
+        HOST, PORT = 'localhost', 9920
         server = XmlrpcServer(HOST, PORT)
         server_thread = threading.Thread(target=server.start)
         server_thread.start()

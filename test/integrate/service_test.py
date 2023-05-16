@@ -83,7 +83,7 @@ class TCPTest(unittest.TestCase):
     """
 
     def test_tcp(self):
-        HOST, PORT = "localhost", 9900
+        HOST, PORT = "localhost", 8800
         server = MyTCPServer(HOST, PORT)
         server_thread = threading.Thread(target=server.start)
         server_thread.start()
@@ -100,7 +100,7 @@ class TCPTest(unittest.TestCase):
 # API_3
 class UDPTest(unittest.TestCase):
     def test_udp(self):
-        HOST, PORT = "localhost", 9989
+        HOST, PORT = "localhost", 8810
         server = MyUDPServer(HOST, PORT)
         server_thread = threading.Thread(target=server.start)
         server_thread.start()
@@ -138,7 +138,7 @@ class IPGeneratorTest(unittest.TestCase):
 # API_6
 class XmlrpcTest(unittest.TestCase):
     def test_run(self):
-        HOST, PORT = 'localhost', 8000
+        HOST, PORT = 'localhost', 8820
         server = XmlrpcServer(HOST, PORT)
         server_thread = threading.Thread(target=server.start)
         server_thread.start()
@@ -154,7 +154,7 @@ class XmlrpcTest(unittest.TestCase):
 # API_7
 class SslTest(unittest.TestCase):
     def test_run(self):
-        HOST, PORT = "localhost", 9999
+        HOST, PORT = "localhost", 8830
         cert_server = 'src/server/etc/cert.pem'
         key_server = 'src/server/etc/key.pem'
         # cert_server = os.path.join(

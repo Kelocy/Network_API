@@ -8,7 +8,7 @@ import os
 
 class SslTest(unittest.TestCase):
     def test_run(self):
-        HOST, PORT = "localhost", 9999
+        HOST, PORT = "localhost", 9930
         cert_server = 'src/server/etc/cert.pem'
         key_server = 'src/server/etc/key.pem'
         # cert_server = os.path.join(

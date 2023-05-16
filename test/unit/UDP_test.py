@@ -8,7 +8,7 @@ from src.client.UDP_client import MyUDPClient
 # API_3
 class UDPTest(unittest.TestCase):
     def test_udp(self):
-        HOST, PORT = "localhost", 9989
+        HOST, PORT = "localhost", 9910
         server = MyUDPServer(HOST, PORT)
         server_thread = threading.Thread(target=server.start)
         server_thread.start()
